@@ -7,6 +7,7 @@ import type {
   WithContext,
 } from "schema-dts";
 
+import { testimonials, testimonialsAggregate } from "@/lib/content/testimonials";
 import { siteConfig } from "@/lib/site.config";
 
 const ORG_ID = `${siteConfig.url}/#organization`;
@@ -51,6 +52,39 @@ export function organizationSchema(): WithContext<AccountingService> {
       closes: s.closes,
     })),
     sameAs: [social.instagram, social.facebook],
+  };
+}
+
+/**
+ * Avaliações do Google (AggregateRating + Review) anexadas ao MESMO @id do
+ * negócio — o Google faz o merge. Injetado só onde os depoimentos aparecem
+ * (home), como manda a política de review markup.
+ */
+export function reviewsSchema(): WithContext<AccountingService> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "AccountingService",
+    "@id": ORG_ID,
+    name: siteConfig.name,
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: String(testimonialsAggregate.ratingValue),
+      reviewCount: testimonialsAggregate.reviewCount,
+      bestRating: testimonialsAggregate.bestRating,
+      worstRating: testimonialsAggregate.worstRating,
+    },
+    review: testimonials.map((t) => ({
+      "@type": "Review",
+      author: { "@type": "Person", name: t.author },
+      datePublished: t.date,
+      reviewBody: t.text,
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: t.rating,
+        bestRating: 5,
+        worstRating: 1,
+      },
+    })),
   };
 }
 

@@ -11,7 +11,8 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { getLatestPosts } from "@/lib/blog";
 import { services } from "@/lib/content/services";
 import { homeFaqs } from "@/lib/content/home";
-import { faqSchema } from "@/lib/schema";
+import { testimonials } from "@/lib/content/testimonials";
+import { faqSchema, reviewsSchema } from "@/lib/schema";
 
 export default function Home() {
   const latestPosts = getLatestPosts(3);
@@ -19,6 +20,7 @@ export default function Home() {
   return (
     <>
       <JsonLd data={faqSchema(homeFaqs)} />
+      <JsonLd data={reviewsSchema()} />
       <HomeHero />
       <TrustBadges />
       <WhyChoose />
@@ -26,7 +28,7 @@ export default function Home() {
         title="Oferecemos serviços estratégicos para cada etapa da jornada do seu negócio"
         items={services}
       />
-      <Testimonials />
+      <Testimonials reviews={testimonials} />
       <SolutionsGrid />
       <FaqAccordion items={homeFaqs} />
       <BlogPreview posts={latestPosts} />
