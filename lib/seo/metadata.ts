@@ -19,6 +19,8 @@ export function pageMetadata({
   image?: string;
 }): Metadata {
   const url = new URL(path, siteConfig.url).toString();
+  // Usa a imagem da página (banner/capa) ou cai no OG padrão da marca.
+  const images = [image ?? "/og.png"];
   return {
     title,
     description,
@@ -30,7 +32,13 @@ export function pageMetadata({
       url,
       title,
       description,
-      images: image ? [{ url: image }] : undefined,
+      images,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images,
     },
   };
 }

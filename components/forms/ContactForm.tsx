@@ -94,7 +94,7 @@ export function ContactForm() {
             type="tel"
             inputMode="numeric"
             autoComplete="tel"
-            placeholder="(11) 99521-3619"
+            placeholder="(11) 99999-9999"
             maxLength={16}
             className={inputClass}
             aria-invalid={!!errors.phone}

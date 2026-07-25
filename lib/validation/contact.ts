@@ -25,7 +25,7 @@ export const contactSchema = z.object({
     .string({ error: "Informe seu WhatsApp." })
     .trim()
     .min(1, "Informe seu WhatsApp.")
-    .refine(isValidPhoneBR, "WhatsApp inválido. Use o formato (11) 99521-3619."),
+    .refine(isValidPhoneBR, "WhatsApp inválido. Use o formato (11) 99999-9999."),
   message: z.string().trim().max(3000, "Mensagem muito longa.").optional(),
   consent: z
     .boolean()

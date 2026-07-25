@@ -6,7 +6,7 @@ export function phoneDigits(value: string): string {
 }
 
 /**
- * Formata progressivamente como WhatsApp/celular brasileiro: (11) 99521-3619.
+ * Formata progressivamente como WhatsApp/celular brasileiro: (11) 99999-9999.
  * Aceita digitação parcial (mostra a máscara conforme o usuário digita).
  */
 export function formatPhoneBR(value: string): string {
