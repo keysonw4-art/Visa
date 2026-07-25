@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -12,17 +13,22 @@ type Status = "idle" | "sending" | "success" | "error";
 /** Formulário de contato completo (Nome, WhatsApp, E-mail, Mensagem + consentimento). */
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
-  const renderedAt = useMemo(() => Date.now(), []);
 
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<ContactInput>({
     resolver: zodResolver(contactSchema),
     defaultValues: { message: "", company: "", consent: false },
   });
+
+  // Timestamp de render (anti-bot por timing) — gravado no form após o mount.
+  useEffect(() => {
+    setValue("renderedAt", Date.now());
+  }, [setValue]);
 
   async function onSubmit(values: ContactInput) {
     setStatus("sending");
@@ -30,7 +36,7 @@ export function ContactForm() {
       const res = await fetch("/api/contato/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, renderedAt }),
+        body: JSON.stringify(values),
       });
       if (!res.ok) throw new Error("failed");
       setStatus("success");
@@ -90,9 +96,9 @@ export function ContactForm() {
         <input type="checkbox" className="mt-1 h-4 w-4 accent-brand-500" {...register("consent")} />
         <span>
           Li e concordo com a{" "}
-          <a href="/politica-de-privacidade/" className="font-semibold text-brand-600 underline">
+          <Link href="/politica-de-privacidade/" className="font-semibold text-brand-600 underline">
             Política de Privacidade
-          </a>
+          </Link>
           .
         </span>
       </label>

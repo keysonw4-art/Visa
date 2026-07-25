@@ -6,13 +6,15 @@ import { env } from "@/lib/env";
 import { siteConfig } from "@/lib/site.config";
 import type { EmailProvider, LeadEmail, SendResult } from "./provider";
 
+const SEND_TIMEOUT_MS = 10_000;
+
 /**
- * Provider Resend — STUB PRONTO, inerte até ser selecionado por env.
+ * Provider Resend — PRONTO, inerte até ser selecionado por env (EMAIL_PROVIDER=resend).
  *
  * Segurança já embutida:
  * - A API key é lida SÓ aqui, via env server-only; nunca vai ao cliente e nunca
  *   é "buscada" por fetch em runtime (não há endpoint de secret a proteger).
- * - Timeout na chamada de saída (não trava a request).
+ * - Timeout real na chamada de saída (Promise.race) — não trava a request.
  * - O SDK fala HTTPS com api.resend.com; a validação de certificado do Node NÃO
  *   é desabilitada em nenhum ponto (nada de NODE_TLS_REJECT_UNAUTHORIZED=0).
  * - Erros retornam mensagem genérica; a key nunca é logada.
@@ -23,29 +25,33 @@ import type { EmailProvider, LeadEmail, SendResult } from "./provider";
 export class ResendEmailProvider implements EmailProvider {
   readonly name = "resend";
   private readonly client: Resend;
+  private readonly to: string;
+  private readonly from: string;
 
   constructor() {
-    if (!env.RESEND_API_KEY || !env.CONTACT_TO_EMAIL || !env.CONTACT_FROM_EMAIL) {
+    const { RESEND_API_KEY, CONTACT_TO_EMAIL, CONTACT_FROM_EMAIL } = env;
+    if (!RESEND_API_KEY || !CONTACT_TO_EMAIL || !CONTACT_FROM_EMAIL) {
       throw new Error(
         "Resend selecionado, mas RESEND_API_KEY / CONTACT_TO_EMAIL / CONTACT_FROM_EMAIL não estão configurados.",
       );
     }
-    this.client = new Resend(env.RESEND_API_KEY);
+    this.client = new Resend(RESEND_API_KEY);
+    this.to = CONTACT_TO_EMAIL;
+    this.from = `${siteConfig.name} <${CONTACT_FROM_EMAIL}>`;
   }
 
   async sendLead(lead: LeadEmail): Promise<SendResult> {
     try {
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 10_000);
-
-      const { data, error } = await this.client.emails.send({
-        from: `${siteConfig.name} <${env.CONTACT_FROM_EMAIL!}>`,
-        to: [env.CONTACT_TO_EMAIL!],
-        replyTo: lead.email,
-        subject: `Novo contato via ${lead.source} — ${lead.name}`,
-        text: renderLeadText(lead),
-      });
-      clearTimeout(timeout);
+      const { data, error } = await withTimeout(
+        this.client.emails.send({
+          from: this.from,
+          to: [this.to],
+          replyTo: lead.email,
+          subject: `Novo contato via ${lead.source} — ${lead.name}`,
+          text: renderLeadText(lead),
+        }),
+        SEND_TIMEOUT_MS,
+      );
 
       if (error) {
         console.error("[email:resend] falha no envio:", error.name);
@@ -53,10 +59,18 @@ export class ResendEmailProvider implements EmailProvider {
       }
       return { ok: true, id: data?.id ?? "sent" };
     } catch {
-      // Nunca vaza stack/secret para o cliente.
+      // Timeout ou erro inesperado — nunca vaza stack/secret para o cliente.
       return { ok: false, error: "send_failed" };
     }
   }
+}
+
+/** Rejeita se a promise não resolver dentro de `ms`. */
+function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) => setTimeout(() => reject(new Error("email_timeout")), ms)),
+  ]);
 }
 
 function renderLeadText(lead: LeadEmail): string {

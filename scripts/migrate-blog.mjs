@@ -34,7 +34,6 @@ async function fetchRetry(url, opts = {}, tries = 4) {
 }
 
 const stripTags = (html) => he.decode(html.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim());
-const toDate = (iso) => (iso || "").slice(0, 10); // YYYY-MM-DD
 
 function safeName(url) {
   try {

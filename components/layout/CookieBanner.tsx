@@ -1,10 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/Button";
-import { readConsent, setConsent } from "@/components/analytics/consent";
+import { CONSENT_EVENT, readConsent, setConsent } from "@/components/analytics/consent";
+
+/** Lê o consentimento como "external store" — sem setState em effect. */
+function subscribe(callback: () => void) {
+  window.addEventListener(CONSENT_EVENT, callback);
+  window.addEventListener("storage", callback);
+  return () => {
+    window.removeEventListener(CONSENT_EVENT, callback);
+    window.removeEventListener("storage", callback);
+  };
+}
 
 /**
  * Banner de cookies próprio (substitui o AdOpt), leve e integrado ao Consent
@@ -12,17 +22,17 @@ import { readConsent, setConsent } from "@/components/analytics/consent";
  * consentimento do GTM.
  */
 export function CookieBanner() {
-  const [visible, setVisible] = useState(false);
+  // null = usuário ainda não decidiu → mostra o banner.
+  const consent = useSyncExternalStore(
+    subscribe,
+    () => readConsent(),
+    () => null,
+  );
 
-  useEffect(() => {
-    if (readConsent() === null) setVisible(true);
-  }, []);
-
-  if (!visible) return null;
+  if (consent !== null) return null;
 
   function decide(value: "granted" | "denied") {
-    setConsent(value);
-    setVisible(false);
+    setConsent(value); // dispara CONSENT_EVENT → o store re-renderiza e some.
   }
 
   return (

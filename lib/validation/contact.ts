@@ -30,14 +30,3 @@ export const contactSchema = z.object({
 });
 
 export type ContactInput = z.infer<typeof contactSchema>;
-
-/** Variante enxuta para o formulário curto da sidebar do blog. */
-export const blogLeadSchema = contactSchema.pick({
-  name: true,
-  email: true,
-  consent: true,
-  company: true,
-  renderedAt: true,
-});
-
-export type BlogLeadInput = z.infer<typeof blogLeadSchema>;

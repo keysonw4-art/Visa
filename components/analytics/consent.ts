@@ -3,6 +3,8 @@
 /** Utilitários de consentimento (LGPD + Google Consent Mode v2). */
 
 export const CONSENT_KEY = "visa-consent";
+/** Evento disparado quando o consentimento muda (para a UI reagir). */
+export const CONSENT_EVENT = "visa-consent-change";
 
 export type ConsentValue = "granted" | "denied";
 
@@ -25,6 +27,7 @@ export function setConsent(value: ConsentValue) {
     /* ignora storage indisponível */
   }
   updateGoogleConsent(value);
+  window.dispatchEvent(new Event(CONSENT_EVENT));
 }
 
 /** Empurra o consentimento atualizado para o dataLayer (gtag). */

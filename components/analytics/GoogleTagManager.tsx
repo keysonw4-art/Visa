@@ -24,33 +24,37 @@ export function GoogleTagManager() {
       <link rel="preconnect" href="https://www.googletagmanager.com" />
       <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
-      {/* 1. Consent Mode default — precisa rodar primeiro. */}
-      <Script id="consent-default" strategy="beforeInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('consent', 'default', {
-            ad_storage: 'denied',
-            analytics_storage: 'denied',
-            ad_user_data: 'denied',
-            ad_personalization: 'denied',
-            functionality_storage: 'granted',
-            security_storage: 'granted',
-            wait_for_update: 500
-          });
-          try {
-            var c = localStorage.getItem('visa-consent');
-            if (c === 'granted') {
-              gtag('consent', 'update', {
-                ad_storage: 'granted',
-                analytics_storage: 'granted',
-                ad_user_data: 'granted',
-                ad_personalization: 'granted'
-              });
-            }
-          } catch (e) {}
-        `}
-      </Script>
+      {/* 1. Consent Mode default — script inline no <head>, roda na ordem do
+             documento (antes do GTM), garantindo o consentimento padrão negado. */}
+      <script
+        id="consent-default"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('consent', 'default', {
+              ad_storage: 'denied',
+              analytics_storage: 'denied',
+              ad_user_data: 'denied',
+              ad_personalization: 'denied',
+              functionality_storage: 'granted',
+              security_storage: 'granted',
+              wait_for_update: 500
+            });
+            try {
+              var c = localStorage.getItem('visa-consent');
+              if (c === 'granted') {
+                gtag('consent', 'update', {
+                  ad_storage: 'granted',
+                  analytics_storage: 'granted',
+                  ad_user_data: 'granted',
+                  ad_personalization: 'granted'
+                });
+              }
+            } catch (e) {}
+          `,
+        }}
+      />
 
       {/* 2. Containers GTM. */}
       {ids.map((id) => (

@@ -22,17 +22,3 @@ export function Section({
     </Tag>
   );
 }
-
-/** Rótulo pequeno acima do título de seção (eyebrow), estilo do site atual. */
-export function Eyebrow({ className, children }: { className?: string; children: React.ReactNode }) {
-  return (
-    <span
-      className={cn(
-        "block text-xs font-bold uppercase tracking-widest text-brand-300",
-        className,
-      )}
-    >
-      {children}
-    </span>
-  );
-}
