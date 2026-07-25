@@ -45,4 +45,13 @@ export const redirects: Redirect[] = [
   { source: "/contabilidade-para-prestadores-de-servico-em-cascavel-pr", destination: "/contabilidade-para-prestadores-de-servico/" },
   // Blog
   { source: "/noticias", destination: "/noticias-contabeis/" },
+  // Posts que mudaram de slug (_wp_old_slug nativo do WordPress)
+  {
+    source: "/imposto-no-municipio-errado-guia-e-consultoria-tributaria",
+    destination: "/imposto-no-municipio-errado/",
+  },
+  {
+    source: "/planejamento-tributario-industrial-2026-estrategias-e-incentivos-no-pr",
+    destination: "/planejamento-tributario-industrial-2026/",
+  },
 ];
