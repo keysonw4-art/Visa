@@ -1,6 +1,12 @@
 import { posts as allPosts } from "#content";
 
 import type { PostCardData } from "@/components/blog/PostCard";
+import {
+  blogCategories,
+  consolidatedCategories,
+  primaryCategory,
+  type BlogCategory,
+} from "@/lib/content/categories";
 
 /** Quantidade de posts por página na listagem do blog. */
 export const POSTS_PER_PAGE = 12;
@@ -13,14 +19,35 @@ export function getPublishedPosts() {
 }
 
 function toCard(p: ReturnType<typeof getPublishedPosts>[number]): PostCardData {
+  const cat = primaryCategory(p.categories);
   return {
     title: p.title,
     url: p.url,
     excerpt: p.excerpt,
     date: p.date,
     cover: p.cover?.src,
-    category: p.categories[0],
+    category: cat.name,
+    categorySlug: cat.slug,
   };
+}
+
+/** Categorias consolidadas que têm pelo menos 1 post, com contagem. */
+export function getCategoriesWithCounts(): (BlogCategory & { count: number })[] {
+  const posts = getPublishedPosts();
+  return blogCategories
+    .map((c) => ({
+      ...c,
+      count: posts.filter((p) => consolidatedCategories(p.categories).some((x) => x.slug === c.slug))
+        .length,
+    }))
+    .filter((c) => c.count > 0);
+}
+
+/** Posts de uma categoria consolidada (por slug), no formato de card. */
+export function getPostsByCategory(slug: string): PostCardData[] {
+  return getPublishedPosts()
+    .filter((p) => consolidatedCategories(p.categories).some((c) => c.slug === slug))
+    .map(toCard);
 }
 
 /** N posts mais recentes, no formato de card. */

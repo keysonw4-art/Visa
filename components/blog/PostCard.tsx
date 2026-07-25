@@ -10,6 +10,7 @@ export type PostCardData = {
   date: string;
   cover?: string;
   category?: string;
+  categorySlug?: string;
 };
 
 const dateFmt = new Intl.DateTimeFormat("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" });

@@ -8,6 +8,7 @@ import { Container } from "@/components/ui/Container";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { BLUR_DATA_URL } from "@/lib/blur";
 import { getPublishedPosts } from "@/lib/blog";
+import { primaryCategory } from "@/lib/content/categories";
 import { articleSchema, breadcrumbSchema } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo/metadata";
 
@@ -60,7 +61,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           { name: post.title, path: post.url },
         ])}
       />
-      <PageHero eyebrow={post.categories[0] ?? "Blog"} title={post.title} breadcrumb="Blog" />
+      <PageHero
+        eyebrow={primaryCategory(post.categories).name}
+        title={post.title}
+        breadcrumb="Blog"
+      />
       <article className="bg-white py-16 lg:py-20">
         <Container className="max-w-3xl">
           <p className="text-sm text-ink-400">

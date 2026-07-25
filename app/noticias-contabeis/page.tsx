@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { PageHero } from "@/components/sections/PageHero";
 import { PostCard } from "@/components/blog/PostCard";
+import { CategoryNav } from "@/components/blog/CategoryNav";
 import { Pagination } from "@/components/blog/Pagination";
 import { Container } from "@/components/ui/Container";
 import { getPageCount, getPostsPage } from "@/lib/blog";
@@ -39,7 +40,8 @@ export default function BlogPage() {
             </div>
           ) : (
             <>
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <CategoryNav />
+              <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {posts.map((post) => (
                   <PostCard key={post.url} post={post} />
                 ))}

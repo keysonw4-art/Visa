@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { getPublishedPosts } from "@/lib/blog";
+import { getCategoriesWithCounts, getPublishedPosts } from "@/lib/blog";
 import { siteConfig } from "@/lib/site.config";
 
 /** URLs estáticas do site (com barra final, padrão preservado do WordPress). */
@@ -28,6 +28,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: path === "/" ? 1 : 0.8,
   }));
 
+  const categories: MetadataRoute.Sitemap = getCategoriesWithCounts().map((c) => ({
+    url: `${base}/noticias-contabeis/categoria/${c.slug}/`,
+    changeFrequency: "weekly",
+    priority: 0.6,
+  }));
+
   const posts: MetadataRoute.Sitemap = getPublishedPosts().map((post) => ({
     url: `${base}${post.url}`,
     lastModified: post.updated ?? post.date,
@@ -35,5 +41,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...pages, ...posts];
+  return [...pages, ...categories, ...posts];
 }
