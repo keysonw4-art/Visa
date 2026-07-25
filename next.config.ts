@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+import { redirects as legacyRedirects } from "./lib/redirects";
+
 /**
  * Content-Security-Policy.
  *
@@ -67,6 +69,16 @@ const nextConfig: NextConfig = {
 
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
+  },
+
+  // 301 herdados do WordPress antigo (preservação de SEO das URLs antigas).
+  // statusCode 301 (e não 308) para replicar fielmente o WP e máxima compatibilidade.
+  async redirects() {
+    return legacyRedirects.map((r) => ({
+      source: r.source,
+      destination: r.destination,
+      statusCode: 301 as const,
+    }));
   },
 };
 
