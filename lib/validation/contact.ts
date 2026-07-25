@@ -1,23 +1,32 @@
 import { z } from "zod";
 
+import { isValidPhoneBR } from "@/lib/utils/phone";
+
 /**
  * Schema compartilhado entre cliente (React Hook Form) e servidor (route handler).
  * O servidor revalida sempre — nunca confia no que veio do cliente.
+ * Cada campo valida seu TIPO e FORMATO: nome/e-mail/WhatsApp são obrigatórios;
+ * consentimento é boolean que precisa ser true.
  */
 
 export const contactSchema = z.object({
   name: z
-    .string()
+    .string({ error: "Informe seu nome." })
     .trim()
     .min(2, "Informe seu nome completo.")
     .max(120, "Nome muito longo."),
-  email: z.email("E-mail inválido.").max(160),
-  phone: z
-    .string()
+  email: z
+    .string({ error: "Informe seu e-mail." })
     .trim()
-    .min(8, "Informe um telefone/WhatsApp válido.")
-    .max(40),
-  message: z.string().trim().max(3000).optional(),
+    .min(1, "Informe seu e-mail.")
+    .max(160, "E-mail muito longo.")
+    .pipe(z.email("E-mail inválido. Ex.: nome@empresa.com.br")),
+  phone: z
+    .string({ error: "Informe seu WhatsApp." })
+    .trim()
+    .min(1, "Informe seu WhatsApp.")
+    .refine(isValidPhoneBR, "WhatsApp inválido. Use o formato (11) 99521-3619."),
+  message: z.string().trim().max(3000, "Mensagem muito longa.").optional(),
   consent: z
     .boolean()
     .refine((v) => v === true, "É necessário aceitar a Política de Privacidade."),

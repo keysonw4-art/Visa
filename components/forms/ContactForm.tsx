@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button } from "@/components/ui/Button";
 import { contactSchema, type ContactInput } from "@/lib/validation/contact";
+import { formatPhoneBR } from "@/lib/utils/phone";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -22,8 +23,15 @@ export function ContactForm() {
     formState: { errors },
   } = useForm<ContactInput>({
     resolver: zodResolver(contactSchema),
+    // Valida assim que o usuário sai do campo e revalida a cada tecla:
+    // dá feedback imediato do que está certo/errado.
+    mode: "onTouched",
+    reValidateMode: "onChange",
     defaultValues: { message: "", company: "", consent: false },
   });
+
+  // Aplica a máscara de WhatsApp conforme o usuário digita.
+  const phoneField = register("phone");
 
   // Timestamp de render (anti-bot por timing) — gravado no form após o mount.
   useEffect(() => {
@@ -70,21 +78,42 @@ export function ContactForm() {
         </label>
       </div>
 
-      <Field label="Nome completo" error={errors.name?.message}>
+      <Field label="Nome completo" required error={errors.name?.message}>
         <input
           type="text"
           autoComplete="name"
           className={inputClass}
+          aria-invalid={!!errors.name}
           {...register("name")}
         />
       </Field>
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="WhatsApp" error={errors.phone?.message}>
-          <input type="tel" autoComplete="tel" className={inputClass} {...register("phone")} />
+        <Field label="WhatsApp" required error={errors.phone?.message}>
+          <input
+            type="tel"
+            inputMode="numeric"
+            autoComplete="tel"
+            placeholder="(11) 99521-3619"
+            maxLength={16}
+            className={inputClass}
+            aria-invalid={!!errors.phone}
+            {...phoneField}
+            onChange={(e) => {
+              e.target.value = formatPhoneBR(e.target.value);
+              void phoneField.onChange(e);
+            }}
+          />
         </Field>
-        <Field label="E-mail" error={errors.email?.message}>
-          <input type="email" autoComplete="email" className={inputClass} {...register("email")} />
+        <Field label="E-mail" required error={errors.email?.message}>
+          <input
+            type="email"
+            autoComplete="email"
+            placeholder="nome@empresa.com.br"
+            className={inputClass}
+            aria-invalid={!!errors.email}
+            {...register("email")}
+          />
         </Field>
       </div>
 
@@ -123,15 +152,24 @@ const inputClass =
 function Field({
   label,
   error,
+  required = false,
   children,
 }: {
   label: string;
   error?: string;
+  required?: boolean;
   children: React.ReactNode;
 }) {
   return (
     <label className="block">
-      <span className="mb-1.5 block text-sm font-medium text-ink-700">{label}</span>
+      <span className="mb-1.5 block text-sm font-medium text-ink-700">
+        {label}
+        {required && (
+          <span className="ml-0.5 text-accent-red" aria-hidden="true">
+            *
+          </span>
+        )}
+      </span>
       {children}
       {error && <span className="mt-1 block text-sm text-accent-red">{error}</span>}
     </label>
