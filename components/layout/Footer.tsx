@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/ui/Container";
@@ -14,8 +15,14 @@ export function Footer() {
       <Container className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
         {/* Marca */}
         <div className="lg:col-span-1">
-          <Link href="/" className="text-lg font-extrabold text-white">
-            Visa<span className="text-teal-400"> Contabilidade</span>
+          <Link href="/" aria-label="Visa Contabilidade — página inicial" className="inline-flex">
+            <Image
+              src="/images/logo.webp"
+              alt="Visa Contabilidade"
+              width={707}
+              height={419}
+              className="h-12 w-auto brightness-0 invert"
+            />
           </Link>
           <p className="mt-4 text-sm leading-relaxed text-ink-400">
             Contabilidade especializada em Cascavel-PR há mais de 20 anos, com foco em planejamento

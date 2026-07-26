@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 import { ButtonLink } from "@/components/ui/Button";
@@ -23,9 +24,16 @@ export function Header() {
   return (
     <header className="sticky top-0 z-30 border-b border-ink-100 bg-white/95 backdrop-blur">
       <Container className="flex h-20 items-center justify-between gap-4">
-        {/* Logo (placeholder textual até migrar a imagem oficial). */}
-        <Link href="/" className="text-lg font-extrabold tracking-tight text-brand-600">
-          Visa<span className="text-teal-500"> Contabilidade</span>
+        {/* Logo oficial */}
+        <Link href="/" aria-label="Visa Contabilidade — página inicial" className="flex shrink-0 items-center">
+          <Image
+            src="/images/logo.webp"
+            alt="Visa Contabilidade"
+            width={707}
+            height={419}
+            priority
+            className="h-10 w-auto sm:h-12"
+          />
         </Link>
 
         {/* Navegação desktop */}
