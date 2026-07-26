@@ -91,9 +91,22 @@ export function Footer() {
           <p>
             © {year} {siteConfig.legalName}. Todos os direitos reservados.
           </p>
-          <Link href="/politica-de-privacidade/" className="hover:text-white">
-            Política de Privacidade
-          </Link>
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+            <Link href="/politica-de-privacidade/" className="hover:text-white">
+              Política de Privacidade
+            </Link>
+            <span>
+              Desenvolvido por{" "}
+              <a
+                href="https://www.skagency.com.br/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-ink-300 transition-colors hover:text-[#e8461e]"
+              >
+                skagency
+              </a>
+            </span>
+          </div>
         </Container>
       </div>
     </footer>
