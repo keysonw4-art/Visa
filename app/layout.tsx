@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Manrope } from "next/font/google";
 
 import "./globals.css";
+import { ConsoleSignature } from "@/components/analytics/ConsoleSignature";
 import {
   GoogleTagManager,
   GoogleTagManagerNoScript,
@@ -62,6 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="pt-BR" className={`${manrope.variable} h-full`}>
       <head>
         <GoogleTagManager />
+        <ConsoleSignature />
         <JsonLd data={organizationSchema()} />
         <JsonLd data={websiteSchema()} />
       </head>
