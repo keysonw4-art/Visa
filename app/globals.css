@@ -73,6 +73,25 @@
     color: var(--color-ink-900);
     text-wrap: balance;
   }
+
+  /* Autofill do Chrome: sobrescreve o fundo azulado padrão pra não brigar com
+     o estilo do input. O único jeito que o Chrome respeita é box-shadow inset;
+     `background-color` normal é ignorado no autofill. */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+    -webkit-text-fill-color: var(--color-ink-800) !important;
+    caret-color: var(--color-ink-800);
+    /* Atrasa a transição de background pra o azul do autofill nunca "piscar" */
+    transition:
+      background-color 5000s ease-in-out 0s,
+      color 5000s ease-in-out 0s;
+  }
 }
 
 /* Esconde a scrollbar NATIVA da página — usamos um indicador de progresso
