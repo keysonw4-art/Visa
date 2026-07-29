@@ -4,10 +4,11 @@ import { phoneDigits } from "@/lib/utils/phone";
 import { siteConfig } from "@/lib/site.config";
 import type { LeadEmail } from "@/lib/email/provider";
 
-// URL absoluta é obrigatória em e-mail HTML (clientes bloqueiam paths relativos).
-// WebP é suportado por Gmail/Apple Mail/Outlook 2019+ (o cliente recebe pelo
-// Google Workspace, então funciona). Outlook antigo mostra o alt text.
-const LOGO_URL = `${siteConfig.url}/images/logo.webp`;
+// URL absoluta obrigatória em e-mail HTML. PNG (não WebP) porque o proxy de
+// imagens do Gmail (googleusercontent/ggpht) achata o alpha de WebPs — resultado:
+// fundo preto no lugar da transparência. PNG preserva transparência em todos
+// os clientes de e-mail sem exceção.
+const LOGO_URL = `${siteConfig.url}/images/logo.png`;
 
 /**
  * Template do e-mail de lead — versões HTML e texto (fallback).
