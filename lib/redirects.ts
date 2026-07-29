@@ -54,4 +54,29 @@ export const redirects: Redirect[] = [
     source: "/planejamento-tributario-industrial-2026-estrategias-e-incentivos-no-pr",
     destination: "/planejamento-tributario-industrial-2026/",
   },
+
+  // ─── URLs órfãs identificadas via Google Search Console (12 meses) ───────
+  // Home antiga do WordPress
+  { source: "/home", destination: "/" },
+  // Variação de URL antiga do WP
+  {
+    source: "/analise-tributaria-para-empresas-em-cascavel",
+    destination: "/analise-tributaria-para-empresas/",
+  },
+
+  // Categorias/Tags do WP antigo — todo o padrão vira o blog (não temos as
+  // taxonomias antigas replicadas 1:1; consolidamos em 9 categorias novas).
+  // Sources com "/" no fim porque trailingSlash:true normaliza a URL antes
+  // de aplicar o redirect. `:slug*` captura 0 ou mais segmentos após.
+  { source: "/Categorias/:slug*/", destination: "/noticias-contabeis/" },
+  { source: "/categorias/:slug*/", destination: "/noticias-contabeis/" },
+  { source: "/Tags/:slug*/", destination: "/noticias-contabeis/" },
+  { source: "/tags/:slug*/", destination: "/noticias-contabeis/" },
+  { source: "/category/:slug*/", destination: "/noticias-contabeis/" },
+  { source: "/tag/:slug*/", destination: "/noticias-contabeis/" },
+
+  // WP antigo tinha permalinks prefixados pela categoria: /categoria/nome-do-post
+  // → agora todos os posts vivem na raiz. Preserva o slug do post.
+  { source: "/gestao-de-negocio/:slug/", destination: "/:slug/" },
+  { source: "/simples-nacional/:slug/", destination: "/:slug/" },
 ];
