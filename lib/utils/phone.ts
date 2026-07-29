@@ -1,8 +1,12 @@
 /** Utilitários de telefone/WhatsApp brasileiro. */
 
-/** Só os dígitos (até 11). */
+/** Só os dígitos (até 11). Remove o "55" do código do país se vier em E.164
+ *  (padrão do autofill do Chrome: "5511995213619"). */
 export function phoneDigits(value: string): string {
-  return value.replace(/\D/g, "").slice(0, 11);
+  let d = value.replace(/\D/g, "");
+  // 12 ou 13 dígitos começando com 55 = número BR em formato internacional.
+  if (d.length > 11 && d.startsWith("55")) d = d.slice(2);
+  return d.slice(0, 11);
 }
 
 /**
