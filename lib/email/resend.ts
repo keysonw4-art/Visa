@@ -4,6 +4,7 @@ import { Resend } from "resend";
 
 import { env } from "@/lib/env";
 import { siteConfig } from "@/lib/site.config";
+import { renderLeadHtml, renderLeadText } from "@/lib/email/templates/lead";
 import type { EmailProvider, LeadEmail, SendResult } from "./provider";
 
 const SEND_TIMEOUT_MS = 10_000;
@@ -49,6 +50,7 @@ export class ResendEmailProvider implements EmailProvider {
           replyTo: lead.email,
           subject: `Novo contato via ${lead.source} — ${lead.name}`,
           text: renderLeadText(lead),
+          html: renderLeadHtml(lead),
         }),
         SEND_TIMEOUT_MS,
       );
@@ -71,17 +73,4 @@ function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
     promise,
     new Promise<T>((_, reject) => setTimeout(() => reject(new Error("email_timeout")), ms)),
   ]);
-}
-
-function renderLeadText(lead: LeadEmail): string {
-  return [
-    `Origem: ${lead.source}`,
-    `Nome: ${lead.name}`,
-    `E-mail: ${lead.email}`,
-    lead.phone ? `Telefone/WhatsApp: ${lead.phone}` : null,
-    "",
-    lead.message ? `Mensagem:\n${lead.message}` : "(sem mensagem)",
-  ]
-    .filter((l) => l !== null)
-    .join("\n");
 }
