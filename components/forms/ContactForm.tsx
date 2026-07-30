@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button } from "@/components/ui/Button";
+import { pushEvent } from "@/lib/analytics/dataLayer";
 import { contactSchema, type ContactInput } from "@/lib/validation/contact";
 import { formatPhoneBR } from "@/lib/utils/phone";
 
@@ -47,6 +48,9 @@ export function ContactForm() {
         body: JSON.stringify(values),
       });
       if (!res.ok) throw new Error("failed");
+      // Evento de conversão pro GTM (usado como trigger de conversão no Ads).
+      // Dispara SÓ no sucesso — sem contar tentativas falhas.
+      pushEvent("form_submit", { source: "contato", form: "contact_full" });
       setStatus("success");
       reset();
     } catch {

@@ -7,6 +7,7 @@ import {
   GoogleTagManager,
   GoogleTagManagerNoScript,
 } from "@/components/analytics/GoogleTagManager";
+import { WhatsAppTracker } from "@/components/analytics/WhatsAppTracker";
 import { CookieBanner } from "@/components/layout/CookieBanner";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -69,6 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="flex min-h-full flex-col antialiased">
         <GoogleTagManagerNoScript />
+        <WhatsAppTracker />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
