@@ -67,11 +67,10 @@ export const siteConfig = {
 
   /**
    * Tracking a preservar da migração (identificadores públicos).
-   * Dois containers GTM + conversão do Google Ads.
+   * A conversão do Google Ads e o GA4 são disparados de dentro do próprio GTM.
    */
   tracking: {
-    gtmIds: ["GTM-WPVSD2QZ", "GTM-NHB4TL6M"],
-    googleAdsId: "AW-726922419",
+    gtmIds: ["GTM-WPVSD2QZ"],
   },
 
   /** Navegação principal — reflete os slugs exatos do WordPress (preservação de URL). */
