@@ -34,6 +34,8 @@ const GOOGLE_TAG_MANAGER = [
 const GOOGLE_ADS = [
   // Ads/Doubleclick — collect, conversion, remarketing
   "https://www.google.com", // /ccm/collect, /pagead/conversion, /pagead/1p-conversion, /rmkt/collect
+  "https://www.google.com.br", // Ads roteia via TLD do país (Brasil) para 1p-conversion
+  "https://*.google.com.br",
   "https://googleads.g.doubleclick.net",
   "https://*.g.doubleclick.net",
   "https://*.doubleclick.net",
