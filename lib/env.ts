@@ -27,6 +27,13 @@ export const env = createEnv({
      * e pra deploy incremental. Em produção, defina para ativar.
      */
     TURNSTILE_SECRET_KEY: z.string().min(1).optional(),
+    /**
+     * Upstash Redis REST — usado pelo rate-limiter DURÁVEL do formulário.
+     * Se ambas ausentes, o rate-limiter cai no fallback in-memory (ver
+     * lib/security/rate-limit). Compatível com Vercel KV via Marketplace.
+     */
+    UPSTASH_REDIS_REST_URL: z.url().optional(),
+    UPSTASH_REDIS_REST_TOKEN: z.string().min(1).optional(),
   },
   client: {
     /** URL pública do site (canonical, sitemap, OG). */
@@ -43,6 +50,8 @@ export const env = createEnv({
     CONTACT_TO_EMAIL: process.env.CONTACT_TO_EMAIL,
     CONTACT_FROM_EMAIL: process.env.CONTACT_FROM_EMAIL,
     TURNSTILE_SECRET_KEY: process.env.TURNSTILE_SECRET_KEY,
+    UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
+    UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN,
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
     NEXT_PUBLIC_TURNSTILE_SITE_KEY: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
   },

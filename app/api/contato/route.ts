@@ -23,9 +23,9 @@ export async function POST(request: Request): Promise<Response> {
     return NextResponse.json({ ok: false, error: "forbidden" }, { status: 403 });
   }
 
-  // 3. Rate limit por IP (best-effort, ver lib/security/rate-limit).
+  // 3. Rate limit por IP (durável via Upstash se configurado, in-memory senão).
   const ip = clientIp(request.headers);
-  const rl = contactRateLimiter.check(`contato:${ip}`);
+  const rl = await contactRateLimiter.check(`contato:${ip}`);
   if (!rl.success) {
     return NextResponse.json(
       { ok: false, error: "rate_limited" },
