@@ -45,9 +45,9 @@ export const siteConfig = {
     state: "PR",
     zip: "85801-010",
     country: "BR",
-    // Coordenadas do centro de Cascavel — refinar com o ponto exato para o schema geo.
-    latitude: -24.9555,
-    longitude: -53.4552,
+    // Coordenadas exatas da fachada da Visa (extraídas do Google Maps embed).
+    latitude: -24.956347,
+    longitude: -53.465154,
   },
 
   /** Horário de atendimento (usado no footer e no schema openingHours). */

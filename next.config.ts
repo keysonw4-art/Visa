@@ -105,6 +105,7 @@ const csp = [
   [
     "frame-src 'self'",
     ...GOOGLE_TAG_MANAGER,
+    "https://www.google.com", // Google Maps embed (página de contato)
     "https://td.doubleclick.net",
     "https://bid.g.doubleclick.net",
     ...META_PIXEL,

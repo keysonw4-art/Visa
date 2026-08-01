@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { ContactForm } from "@/components/forms/ContactForm";
+import { ContactMap } from "@/components/sections/ContactMap";
 import { PageHero } from "@/components/sections/PageHero";
 import { Container } from "@/components/ui/Container";
 import { siteConfig, whatsappLink } from "@/lib/site.config";
@@ -70,6 +71,8 @@ export default function ContatoPage() {
           </div>
         </Container>
       </section>
+
+      <ContactMap />
     </>
   );
 }
