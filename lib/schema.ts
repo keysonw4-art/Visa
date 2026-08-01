@@ -14,10 +14,17 @@ const ORG_ID = `${siteConfig.url}/#organization`;
 
 /**
  * Negócio local (AccountingService) — a maior alavanca de SEO local/GEO.
- * NAP + geo + horário + redes. Injetado globalmente no layout.
+ * NAP + geo + horário + redes + hasMap. Injetado globalmente no layout.
  */
 export function organizationSchema(): WithContext<AccountingService> {
   const { address, contact, hours, social } = siteConfig;
+  // URL de busca no Google Maps a partir do endereço formatado. Permite ao
+  // Google (e a outras IAs) resolver o "onde é a Visa" sem depender só das
+  // coordenadas — dobra a chance de aparecer em resultados "perto de mim".
+  const mapQuery = encodeURIComponent(
+    `${siteConfig.name}, ${address.street}, ${address.district}, ${address.city} - ${address.state}, ${address.zip}`,
+  );
+  const hasMap = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
   return {
     "@context": "https://schema.org",
     "@type": "AccountingService",
@@ -32,6 +39,7 @@ export function organizationSchema(): WithContext<AccountingService> {
     priceRange: "$$",
     foundingDate: String(siteConfig.foundingYear),
     areaServed: "BR",
+    hasMap,
     address: {
       "@type": "PostalAddress",
       streetAddress: address.street,
