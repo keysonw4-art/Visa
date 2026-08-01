@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button } from "@/components/ui/Button";
+import { TurnstileWidget, isTurnstileEnabled } from "@/components/security/TurnstileWidget";
 import { pushEvent } from "@/lib/analytics/dataLayer";
 import { contactSchema, type ContactInput } from "@/lib/validation/contact";
 import { formatPhoneBR } from "@/lib/utils/phone";
@@ -15,6 +16,7 @@ type Status = "idle" | "sending" | "success" | "error";
 /** Formulário de contato completo (Nome, WhatsApp, E-mail, Mensagem + consentimento). */
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
+  const turnstileEnabled = isTurnstileEnabled();
 
   const {
     register,
@@ -28,7 +30,7 @@ export function ContactForm() {
     // dá feedback imediato do que está certo/errado.
     mode: "onTouched",
     reValidateMode: "onChange",
-    defaultValues: { message: "", company: "", consent: false },
+    defaultValues: { message: "", company: "", consent: false, turnstileToken: "" },
   });
 
   // Aplica a máscara de WhatsApp conforme o usuário digita.
@@ -40,6 +42,11 @@ export function ContactForm() {
   }, [setValue]);
 
   async function onSubmit(values: ContactInput) {
+    // Só bloqueia se Turnstile estiver habilitado E o token ainda não veio.
+    if (turnstileEnabled && !values.turnstileToken) {
+      setStatus("error");
+      return;
+    }
     setStatus("sending");
     try {
       const res = await fetch("/api/contato/", {
@@ -136,6 +143,12 @@ export function ContactForm() {
         </span>
       </label>
       {errors.consent?.message && <p className="text-sm text-accent-red">{errors.consent.message}</p>}
+
+      {turnstileEnabled && (
+        <TurnstileWidget
+          onVerify={(token) => setValue("turnstileToken", token, { shouldValidate: false })}
+        />
+      )}
 
       {status === "error" && (
         <p className="text-sm text-accent-red">

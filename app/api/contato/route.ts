@@ -7,6 +7,7 @@ import {
   isSameOrigin,
   looksLikeBot,
 } from "@/lib/security/request-guards";
+import { verifyTurnstileToken } from "@/lib/security/turnstile";
 import { contactSchema } from "@/lib/validation/contact";
 
 /** Endpoint dos formulários. Roda no runtime Node (provider de e-mail server-only). */
@@ -56,7 +57,14 @@ export async function POST(request: Request): Promise<Response> {
     return NextResponse.json({ ok: true, id: "ignored" }, { status: 200 });
   }
 
-  // 7. Proteção contra injeção de header de e-mail.
+  // 7. Cloudflare Turnstile: valida token junto ao siteverify.
+  //    Soft-disable quando TURNSTILE_SECRET_KEY não está setado (dev / deploy incremental).
+  const turnstile = await verifyTurnstileToken(data.turnstileToken, ip);
+  if (!turnstile.ok) {
+    return NextResponse.json({ ok: false, error: "invalid" }, { status: 422 });
+  }
+
+  // 8. Proteção contra injeção de header de e-mail.
   if (hasHeaderInjection(data.name, data.email, data.phone)) {
     return NextResponse.json({ ok: false, error: "invalid" }, { status: 422 });
   }

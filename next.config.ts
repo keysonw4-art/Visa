@@ -66,6 +66,10 @@ const HOTJAR = [
   "https://*.hotjar.com",
   "https://*.hotjar.io",
 ];
+const CLOUDFLARE_TURNSTILE = [
+  // Widget de bot protection do formulário — script + iframe + siteverify.
+  "https://challenges.cloudflare.com",
+];
 
 const csp = [
   "default-src 'self'",
@@ -82,6 +86,7 @@ const csp = [
     ...META_PIXEL,
     ...LINKEDIN_INSIGHT,
     ...HOTJAR,
+    ...CLOUDFLARE_TURNSTILE,
   ].join(" "),
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
@@ -95,6 +100,7 @@ const csp = [
     ...META_PIXEL,
     ...LINKEDIN_INSIGHT,
     ...HOTJAR,
+    ...CLOUDFLARE_TURNSTILE,
   ].join(" "),
   [
     "frame-src 'self'",
@@ -102,6 +108,7 @@ const csp = [
     "https://td.doubleclick.net",
     "https://bid.g.doubleclick.net",
     ...META_PIXEL,
+    ...CLOUDFLARE_TURNSTILE,
   ].join(" "),
   "manifest-src 'self'",
   "media-src 'self'",

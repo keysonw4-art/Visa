@@ -36,6 +36,8 @@ export const contactSchema = z.object({
   company: z.string().max(200).optional(),
   /** Timestamp de quando o form foi renderizado (timing anti-bot). */
   renderedAt: z.number().optional(),
+  /** Token do Cloudflare Turnstile (validado no servidor via siteverify). */
+  turnstileToken: z.string().max(4096).optional(),
 });
 
 export type ContactInput = z.infer<typeof contactSchema>;

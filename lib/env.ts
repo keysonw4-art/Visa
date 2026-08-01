@@ -21,17 +21,30 @@ export const env = createEnv({
     CONTACT_TO_EMAIL: z.email().optional(),
     /** Remetente verificado no Resend. */
     CONTACT_FROM_EMAIL: z.email().optional(),
+    /**
+     * Secret do Cloudflare Turnstile (bot protection). Server-only.
+     * Se ausente, a validação Turnstile é PULADA (soft-disable) — útil pra dev
+     * e pra deploy incremental. Em produção, defina para ativar.
+     */
+    TURNSTILE_SECRET_KEY: z.string().min(1).optional(),
   },
   client: {
     /** URL pública do site (canonical, sitemap, OG). */
     NEXT_PUBLIC_SITE_URL: z.url().optional(),
+    /**
+     * Site key pública do Cloudflare Turnstile. Se ausente, o widget não
+     * renderiza (soft-disable). Pareia com TURNSTILE_SECRET_KEY do lado server.
+     */
+    NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().min(1).optional(),
   },
   runtimeEnv: {
     EMAIL_PROVIDER: process.env.EMAIL_PROVIDER,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     CONTACT_TO_EMAIL: process.env.CONTACT_TO_EMAIL,
     CONTACT_FROM_EMAIL: process.env.CONTACT_FROM_EMAIL,
+    TURNSTILE_SECRET_KEY: process.env.TURNSTILE_SECRET_KEY,
     NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+    NEXT_PUBLIC_TURNSTILE_SITE_KEY: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY,
   },
   /** Trata "" como undefined, evitando envs vazias passarem na validação. */
   emptyStringAsUndefined: true,
