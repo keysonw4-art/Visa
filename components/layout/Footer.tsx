@@ -25,7 +25,7 @@ export function Footer() {
             />
           </Link>
           <p className="mt-4 text-sm leading-relaxed text-ink-400">
-            Contabilidade especializada em Cascavel-PR há mais de 20 anos, com foco em planejamento
+            Contabilidade especializada em Cascavel-PR desde 1985, com foco em planejamento
             tributário e crescimento seguro do seu negócio.
           </p>
           <div className="mt-5 flex gap-3">

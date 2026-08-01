@@ -7,7 +7,7 @@ import { Reveal } from "./Reveal";
 export function CtaBand({
   eyebrow = "Comece agora",
   title = "Deixe a contabilidade conosco e foque no seu crescimento",
-  text = "Com 20 anos de experiência e uma equipe altamente qualificada, ajudamos sua empresa a reduzir custos, otimizar processos e alcançar resultados reais. Entre em contato hoje mesmo.",
+  text = "Com mais de 40 anos de experiência e uma equipe altamente qualificada, ajudamos sua empresa a reduzir custos, otimizar processos e alcançar resultados reais. Entre em contato hoje mesmo.",
   buttonLabel = "Fale com um consultor",
 }: {
   eyebrow?: string;

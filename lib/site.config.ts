@@ -20,11 +20,11 @@ export const siteConfig = {
   legalName: "Visa Contabilidade",
   /** Descrição curta padrão (fallback de metadata e schema). */
   description:
-    "Contabilidade especializada em Cascavel-PR há mais de 20 anos. Planejamento tributário, abertura de empresa, análise tributária e gestão contábil estratégica para o seu negócio.",
+    "Contabilidade especializada em Cascavel-PR desde 1985. Planejamento tributário, abertura de empresa, análise tributária e gestão contábil estratégica para o seu negócio.",
   /** URL canônica de produção (sem barra final). */
   url: "https://contabilidadevisa.com.br",
   locale: "pt-BR",
-  foundingYear: 2003,
+  foundingYear: 1985,
 
   contact: {
     phone: "+55 45 3037-1551",

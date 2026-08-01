@@ -1,7 +1,7 @@
 /** Conteúdo específico da Home (selos, diferenciais, soluções, FAQ). */
 
 export const trustBadges = [
-  { value: "20 anos de experiência", label: "no mercado contábil" },
+  { value: "Desde 1985", label: "no mercado contábil" },
   { value: "+200 clientes satisfeitos", label: "em todo o Brasil" },
   { value: "Equipe especializada", label: "e multidisciplinar" },
   { value: "Foco em resultados", label: "para o seu negócio" },

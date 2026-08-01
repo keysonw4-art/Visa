@@ -266,7 +266,7 @@ export const servicePages: Record<string, ServicePageData> = {
     seo: {
       title: "Contabilidade para Comércio em Cascavel-PR",
       description:
-        "Contabilidade especializada para comércio em Cascavel: planejamento tributário, gestão de fluxo de caixa, regularização e redução de custos. 20 anos ajudando comerciantes a crescer.",
+        "Contabilidade especializada para comércio em Cascavel: planejamento tributário, gestão de fluxo de caixa, regularização e redução de custos. Desde 1985 ajudando comerciantes a crescer.",
     },
     hero: {
       eyebrow: "Especialidades",
@@ -329,9 +329,9 @@ export const servicePages: Record<string, ServicePageData> = {
     },
     intro: {
       eyebrow: "Contabilidade para indústria",
-      title: "Há duas décadas, impulsionando o setor industrial para o sucesso",
+      title: "Há mais de 40 anos, impulsionando o setor industrial para o sucesso",
       paragraphs: [
-        "Desde 2003, a Visa Contabilidade oferece soluções sob medida para indústrias de todos os portes, transformando desafios fiscais em oportunidades de crescimento.",
+        "Desde 1985, a Visa Contabilidade oferece soluções sob medida para indústrias de todos os portes, transformando desafios fiscais em oportunidades de crescimento.",
         "Nosso objetivo é garantir que sua indústria opere com eficiência, esteja em dia com as obrigações fiscais e alcance novos patamares de rentabilidade e competitividade.",
       ],
       image: "/images/contabilidade-para-industria-img-1.webp",
@@ -415,7 +415,7 @@ export const servicePages: Record<string, ServicePageData> = {
     finalCta: {
       eyebrow: "Invista na gestão do seu negócio",
       title: "Deixe a burocracia conosco e foque no crescimento do seu negócio",
-      text: "Com 20 anos de experiência e soluções personalizadas, cuidamos de tudo para que você possa se concentrar no que realmente importa: atender seus clientes e expandir seus serviços.",
+      text: "Com mais de 40 anos de experiência e soluções personalizadas, cuidamos de tudo para que você possa se concentrar no que realmente importa: atender seus clientes e expandir seus serviços.",
       buttonLabel: "Solicite uma proposta agora mesmo",
     },
   },

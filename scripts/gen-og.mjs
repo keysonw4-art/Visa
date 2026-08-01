@@ -31,7 +31,7 @@ const bgSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}
 const textSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
   <rect x="90" y="352" width="96" height="8" rx="4" fill="#ffc107"/>
   <text x="90" y="418" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="bold" fill="#ffffff">Contabilidade Especializada em Cascavel-PR</text>
-  <text x="90" y="470" font-family="Arial, Helvetica, sans-serif" font-size="28" fill="#cce4f1">Planejamento tributário · Abertura de empresa · +20 anos</text>
+  <text x="90" y="470" font-family="Arial, Helvetica, sans-serif" font-size="28" fill="#cce4f1">Planejamento tributário · Abertura de empresa · Desde 1985</text>
   <text x="90" y="560" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#99c9e4">contabilidadevisa.com.br</text>
 </svg>`;
 

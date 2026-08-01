@@ -17,7 +17,7 @@ import { pageMetadata } from "@/lib/seo/metadata";
 export const metadata: Metadata = pageMetadata({
   title: "Conheça a Visa Contabilidade — Escritório de Contabilidade em Cascavel",
   description:
-    "Desde 2003, a Visa Contabilidade é referência em soluções contábeis estratégicas em Cascavel-PR. Conheça nossa missão, visão, valores e a equipe que ajuda empresas a crescerem com segurança.",
+    "Desde 1985, a Visa Contabilidade é referência em soluções contábeis estratégicas em Cascavel-PR. Conheça nossa missão, visão, valores e a equipe que ajuda empresas a crescerem com segurança.",
   path: "/escritorio-de-contabilidade/",
   image: "/images/sobre-banner.webp",
 });
@@ -43,15 +43,15 @@ export default function SobrePage() {
       />
       <PageHero
         eyebrow="Conheça a Visa Contabilidade"
-        title="Duas décadas de excelência contábil, impulsionando negócios para o sucesso"
+        title="Mais de quatro décadas de excelência contábil, impulsionando negócios para o sucesso"
         breadcrumb="Sobre"
         image="/images/sobre-banner.webp"
       />
       <IntroSplit
         eyebrow="Conheça a Visa Contabilidade"
-        title="Referência em soluções contábeis estratégicas desde 2003"
+        title="Referência em soluções contábeis estratégicas desde 1985"
         paragraphs={[
-          "Desde 2003, a Visa Contabilidade tem sido uma referência em soluções contábeis estratégicas.",
+          "Desde 1985, a Visa Contabilidade tem sido uma referência em soluções contábeis estratégicas.",
           "Com uma equipe de profissionais altamente qualificados, atendemos nossos clientes com expertise, proximidade e excelência.",
           "Nosso foco é auxiliar empresas a crescerem de forma sustentável e segura.",
         ]}
