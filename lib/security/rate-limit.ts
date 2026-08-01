@@ -155,10 +155,13 @@ class InMemoryTokenBucket implements RateLimiter {
  * Escolhe o backend uma única vez no boot. Configuração do formulário de
  * contato: 5 requests / 60s por IP (via Upstash) OU capacity 5 + refill 1/12s
  * (in-memory, aproximadamente equivalente sob carga sustentada).
+ *
+ * Os nomes `UPSTASH_REDIS_REST_KV_REST_API_*` refletem o padrão criado pela
+ * integração Vercel Marketplace + Upstash Redis (custom prefix = UPSTASH_REDIS_REST).
  */
 function makeContactRateLimiter(): RateLimiter {
-  const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  const url = process.env.UPSTASH_REDIS_REST_KV_REST_API_URL;
+  const token = process.env.UPSTASH_REDIS_REST_KV_REST_API_TOKEN;
   if (url && token) {
     return new UpstashFixedWindow({ url, token, limit: 5, windowSec: 60 });
   }
