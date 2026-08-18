@@ -32,6 +32,12 @@ export const metadata: Metadata = {
     template: `%s — ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  applicationName: siteConfig.name,
+  keywords: [...siteConfig.seo.keywords],
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  category: "Contabilidade",
   openGraph: {
     type: "website",
     locale: "pt_BR",
@@ -47,10 +53,29 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: ["/og.png"],
   },
-  robots: { index: true, follow: true },
+  // Diretivas ampliadas: permite ao Google exibir snippet/preview de imagem grande
+  // (mais chance de rich result) e nunca truncar o texto do snippet.
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   // Evita o iOS auto-estilizar telefones/e-mails no corpo do texto.
   formatDetection: { telephone: false, email: false, address: false },
   appleWebApp: { capable: true, statusBarStyle: "default", title: siteConfig.name },
+  // Geo tags — sinais de localização para buscadores locais (Bing Places, etc.).
+  other: {
+    "geo.region": `${siteConfig.address.country}-${siteConfig.address.state}`,
+    "geo.placename": siteConfig.address.city,
+    "geo.position": `${siteConfig.address.latitude};${siteConfig.address.longitude}`,
+    ICBM: `${siteConfig.address.latitude}, ${siteConfig.address.longitude}`,
+  },
 };
 
 export const viewport: Viewport = {

@@ -26,6 +26,47 @@ export const siteConfig = {
   locale: "pt-BR",
   foundingYear: 1985,
 
+  /**
+   * SEO — termos, regiões e tópicos de expertise (fonte única).
+   *
+   * `keywords`: a meta tag `keywords` é IGNORADA pelo Google desde 2009; serve
+   * apenas como sinal fraco no Bing e como referência interna. O peso real de
+   * SEO vem do conteúdo, dos títulos e do Schema (`expertise` → knowsAbout).
+   * `areaServed` e `expertise` alimentam o JSON-LD (sinais de autoridade local
+   * e temática, que Google e IAs realmente leem).
+   */
+  seo: {
+    keywords: [
+      "contabilidade em Cascavel",
+      "contador em Cascavel",
+      "escritório de contabilidade Cascavel",
+      "contabilidade Cascavel PR",
+      "abertura de empresa Cascavel",
+      "planejamento tributário",
+      "análise tributária",
+      "assessoria contábil",
+      "troca de contabilidade",
+      "contabilidade para empresas",
+      "planejamento sucessório",
+      "consultoria tributária",
+    ],
+    areaServed: ["Cascavel", "Região Oeste do Paraná", "Paraná", "Brasil"],
+    expertise: [
+      "Planejamento tributário",
+      "Abertura de empresa",
+      "Análise tributária",
+      "Planejamento sucessório",
+      "Contabilidade empresarial",
+      "Escrituração fiscal e contábil",
+      "Departamento pessoal e folha de pagamento",
+      "Simples Nacional",
+      "Lucro Presumido",
+      "Lucro Real",
+      "Imposto de Renda Pessoa Jurídica (IRPJ)",
+      "Regularização de empresas",
+    ],
+  },
+
   contact: {
     phone: "+55 45 3037-1551",
     phoneRaw: "+554530371551",

@@ -38,7 +38,14 @@ export function organizationSchema(): WithContext<AccountingService> {
     logo: `${siteConfig.url}/images/logo.webp`,
     priceRange: "$$",
     foundingDate: String(siteConfig.foundingYear),
-    areaServed: "BR",
+    // Regiões atendidas — sinal de alcance local/regional.
+    areaServed: [...siteConfig.seo.areaServed],
+    // Tópicos de expertise — autoridade temática (E-E-A-T) lida por Google e IAs.
+    knowsAbout: [...siteConfig.seo.expertise],
+    knowsLanguage: ["pt-BR"],
+    slogan: "Contabilidade estratégica em Cascavel-PR desde 1985.",
+    currenciesAccepted: "BRL",
+    paymentAccepted: "Pix, Boleto, Transferência bancária, Cartão",
     hasMap,
     address: {
       "@type": "PostalAddress",
