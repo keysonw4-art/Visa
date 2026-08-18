@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { getCategoriesWithCounts, getPublishedPosts } from "@/lib/blog";
+import { glossaryTerms } from "@/lib/content/glossary";
 import { siteConfig } from "@/lib/site.config";
 
 /** URLs estáticas do site (com barra final, padrão preservado do WordPress). */
@@ -16,6 +17,7 @@ const staticPaths = [
   "/contabilidade-para-industria/",
   "/contabilidade-para-prestadores-de-servico/",
   "/noticias-contabeis/",
+  "/glossario/",
   "/politica-de-privacidade/",
 ];
 
@@ -41,5 +43,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...pages, ...categories, ...posts];
+  const glossary: MetadataRoute.Sitemap = glossaryTerms.map((t) => ({
+    url: `${base}/glossario/${t.slug}/`,
+    changeFrequency: "yearly",
+    priority: 0.5,
+  }));
+
+  return [...pages, ...categories, ...posts, ...glossary];
 }

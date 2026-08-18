@@ -28,7 +28,7 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} — Contabilidade Especializada em Cascavel-PR`,
+    default: `${siteConfig.name} — Contador e Contabilidade em Cascavel-PR`,
     template: `%s — ${siteConfig.name}`,
   },
   description: siteConfig.description,

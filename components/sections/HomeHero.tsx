@@ -16,12 +16,13 @@ export function HomeHero() {
             Contabilidade Especializada
           </span>
           <h1 className="mt-4 text-[clamp(2rem,7vw,3.25rem)] font-extrabold leading-[1.1] text-ink-800">
-            Proteja seu faturamento com uma gestão segura e preventiva
+            Contabilidade em Cascavel para proteger seu faturamento e crescer com segurança
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-600">
-            Há mais de 2 décadas, transformamos desafios empresariais em crescimento sólido. Unimos
-            tecnologia avançada e expertise comprovada para garantir segurança fiscal e otimização
-            de resultados. Vamos juntos fazer sua empresa crescer com inteligência!
+            Desde 1985, transformamos desafios empresariais em crescimento sólido. Unimos
+            tecnologia avançada e a expertise de um escritório de contabilidade completo para
+            garantir segurança fiscal e otimização de resultados. Vamos juntos fazer sua empresa
+            crescer com inteligência!
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <ButtonLink href="/escritorio-contabil/" variant="primary" size="lg">

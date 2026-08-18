@@ -2,6 +2,8 @@ import type {
   AccountingService,
   BlogPosting,
   BreadcrumbList,
+  DefinedTerm,
+  DefinedTermSet,
   FAQPage,
   Service,
   WebSite,
@@ -171,6 +173,49 @@ export function serviceSchema(input: {
     ...(input.image
       ? { image: new URL(input.image, siteConfig.url).toString() }
       : {}),
+  };
+}
+
+const GLOSSARY_SET_ID = `${siteConfig.url}/glossario/#glossario`;
+
+/**
+ * DefinedTerm — um verbete do glossário como entidade. Formato altamente
+ * extraível por IAs (definição factual + fonte) e elegível a rich results.
+ */
+export function definedTermSchema(term: {
+  name: string;
+  description: string;
+  slug: string;
+}): WithContext<DefinedTerm> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "DefinedTerm",
+    name: term.name,
+    description: term.description,
+    url: new URL(`/glossario/${term.slug}/`, siteConfig.url).toString(),
+    inDefinedTermSet: GLOSSARY_SET_ID,
+  };
+}
+
+/** DefinedTermSet — o glossário inteiro como coleção (página índice). */
+export function definedTermSetSchema(
+  terms: { name: string; description: string; slug: string }[],
+): WithContext<DefinedTermSet> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "DefinedTermSet",
+    "@id": GLOSSARY_SET_ID,
+    name: "Glossário de Contabilidade — Visa Contabilidade",
+    description:
+      "Termos de contabilidade e tributação explicados de forma simples pela Visa Contabilidade, escritório contábil em Cascavel-PR.",
+    url: `${siteConfig.url}/glossario/`,
+    inLanguage: "pt-BR",
+    hasDefinedTerm: terms.map((t) => ({
+      "@type": "DefinedTerm",
+      name: t.name,
+      description: t.description,
+      url: new URL(`/glossario/${t.slug}/`, siteConfig.url).toString(),
+    })),
   };
 }
 

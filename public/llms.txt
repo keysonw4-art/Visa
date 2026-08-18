@@ -24,3 +24,21 @@
 - [Conheça a Visa](https://contabilidadevisa.com.br/escritorio-de-contabilidade/)
 - [Contato](https://contabilidadevisa.com.br/escritorio-contabil/)
 - [Blog](https://contabilidadevisa.com.br/noticias-contabeis/)
+
+## Glossário de contabilidade
+Termos contábeis e tributários explicados de forma simples. Índice: https://contabilidadevisa.com.br/glossario/
+- [Regime Tributário](https://contabilidadevisa.com.br/glossario/regime-tributario/)
+- [Simples Nacional](https://contabilidadevisa.com.br/glossario/simples-nacional/)
+- [Lucro Presumido](https://contabilidadevisa.com.br/glossario/lucro-presumido/)
+- [Lucro Real](https://contabilidadevisa.com.br/glossario/lucro-real/)
+- [IRPJ](https://contabilidadevisa.com.br/glossario/irpj/)
+- [ISS](https://contabilidadevisa.com.br/glossario/iss/)
+- [ICMS](https://contabilidadevisa.com.br/glossario/icms/)
+- [DAS](https://contabilidadevisa.com.br/glossario/das/)
+- [MEI](https://contabilidadevisa.com.br/glossario/mei/)
+- [CNPJ](https://contabilidadevisa.com.br/glossario/cnpj/)
+- [NF-e](https://contabilidadevisa.com.br/glossario/nf-e/)
+- [Pró-labore](https://contabilidadevisa.com.br/glossario/pro-labore/)
+- [DRE](https://contabilidadevisa.com.br/glossario/dre/)
+- [Fator R](https://contabilidadevisa.com.br/glossario/fator-r/)
+- [Escrituração Contábil](https://contabilidadevisa.com.br/glossario/escrituracao-contabil/)

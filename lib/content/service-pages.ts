@@ -211,13 +211,13 @@ export const servicePages: Record<string, ServicePageData> = {
   "troca-de-contabilidade": {
     slug: "troca-de-contabilidade",
     seo: {
-      title: "Troca de Contabilidade em Cascavel-PR",
+      title: "Troca de Contabilidade e Contador em Cascavel-PR",
       description:
-        "Troque de contador sem complicação com a Visa Contabilidade: análise do histórico, regularização de pendências, atualização cadastral e migração de dados. Transição tranquila e segura.",
+        "Trocar de contador em Cascavel sem complicação: análise do histórico, regularização de pendências, atualização cadastral e migração de dados. Transição tranquila e segura com a Visa Contabilidade.",
     },
     hero: {
       eyebrow: "Troca de contabilidade",
-      title: "Trocar de contabilidade nunca foi tão fácil: deixe a Visa Contabilidade cuidar de tudo por você!",
+      title: "Trocar de contador nunca foi tão fácil: deixe a Visa Contabilidade cuidar de tudo por você!",
       breadcrumb: "Troca de Contabilidade",
       image: "/images/troca-de-contabilidade-banner.webp",
     },

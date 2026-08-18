@@ -20,7 +20,7 @@ export const siteConfig = {
   legalName: "Visa Contabilidade",
   /** Descrição curta padrão (fallback de metadata e schema). */
   description:
-    "Contabilidade especializada em Cascavel-PR desde 1985. Planejamento tributário, abertura de empresa, análise tributária e gestão contábil estratégica para o seu negócio.",
+    "Escritório de contabilidade e contador em Cascavel-PR desde 1985. Planejamento tributário, abertura de empresa e gestão contábil estratégica para a sua empresa.",
   /** URL canônica de produção (sem barra final). */
   url: "https://contabilidadevisa.com.br",
   locale: "pt-BR",
@@ -144,6 +144,7 @@ export const siteConfig = {
       ],
     },
     { label: "Blog", href: "/noticias-contabeis/" },
+    { label: "Glossário", href: "/glossario/" },
     { label: "Contato", href: "/escritorio-contabil/" },
   ] satisfies NavItem[],
 } as const;
