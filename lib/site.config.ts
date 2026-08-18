@@ -104,6 +104,9 @@ export const siteConfig = {
   social: {
     instagram: "https://www.instagram.com/Contabilidadevisa",
     facebook: "https://www.facebook.com/contabilidadevisa",
+    // Perfil do Google Business (CID extraído do embed oficial do Maps).
+    // Entra no sameAs do Schema para o Google confirmar que é a mesma entidade.
+    googleBusiness: "https://www.google.com/maps?cid=8714472993688010706",
   },
 
   /**

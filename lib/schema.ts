@@ -3,6 +3,7 @@ import type {
   BlogPosting,
   BreadcrumbList,
   FAQPage,
+  Service,
   WebSite,
   WithContext,
 } from "schema-dts";
@@ -66,7 +67,7 @@ export function organizationSchema(): WithContext<AccountingService> {
       opens: s.opens,
       closes: s.closes,
     })),
-    sameAs: [social.instagram, social.facebook],
+    sameAs: [social.instagram, social.facebook, social.googleBusiness],
   };
 }
 
@@ -142,6 +143,34 @@ export function breadcrumbSchema(
       name: item.name,
       item: new URL(item.path, siteConfig.url).toString(),
     })),
+  };
+}
+
+/**
+ * Service — cada página de serviço/especialidade vira uma ENTIDADE indexável,
+ * ligada ao negócio (provider → @id da Visa) e às regiões atendidas. Reforça
+ * buscas do tipo "abertura de empresa Cascavel" e a compreensão por IAs.
+ */
+export function serviceSchema(input: {
+  /** Nome/serviço (ex.: "Abertura de empresa"). */
+  name: string;
+  description: string;
+  /** Slug da página (ex.: "abertura-de-empresa"). */
+  slug: string;
+  image?: string;
+}): WithContext<Service> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: input.name,
+    serviceType: input.name,
+    description: input.description,
+    url: new URL(`/${input.slug}/`, siteConfig.url).toString(),
+    provider: { "@id": ORG_ID },
+    areaServed: [...siteConfig.seo.areaServed],
+    ...(input.image
+      ? { image: new URL(input.image, siteConfig.url).toString() }
+      : {}),
   };
 }
 

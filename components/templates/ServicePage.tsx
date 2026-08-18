@@ -6,12 +6,20 @@ import { PageHero } from "@/components/sections/PageHero";
 import { StepsProcess } from "@/components/sections/StepsProcess";
 import { JsonLd } from "@/components/seo/JsonLd";
 import type { ServicePageData } from "@/lib/content/service-pages";
-import { breadcrumbSchema, faqSchema } from "@/lib/schema";
+import { breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/schema";
 
 /** Template das páginas de serviço/especialidade, guiado por dados. */
 export function ServicePage({ data }: { data: ServicePageData }) {
   return (
     <>
+      <JsonLd
+        data={serviceSchema({
+          name: data.hero.breadcrumb,
+          description: data.seo.description,
+          slug: data.slug,
+          image: data.hero.image,
+        })}
+      />
       <JsonLd data={faqSchema(data.faqs)} />
       <JsonLd
         data={breadcrumbSchema([
