@@ -95,6 +95,9 @@ export function Footer() {
             <Link href="/politica-de-privacidade/" className="hover:text-white">
               Política de Privacidade
             </Link>
+            <Link href="/mapa-do-site/" className="hover:text-white">
+              Mapa do Site
+            </Link>
             <span>
               Desenvolvido por{" "}
               <a

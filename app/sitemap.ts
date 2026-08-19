@@ -18,6 +18,7 @@ const staticPaths = [
   "/contabilidade-para-prestadores-de-servico/",
   "/noticias-contabeis/",
   "/glossario/",
+  "/mapa-do-site/",
   "/politica-de-privacidade/",
 ];
 
