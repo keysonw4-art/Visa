@@ -18,6 +18,8 @@ export type NavItem = {
 export const siteConfig = {
   name: "Visa Contabilidade",
   legalName: "Visa Contabilidade",
+  /** Registro no Conselho Regional de Contabilidade — sinal de autoridade (E-E-A-T). */
+  crc: { label: "CRC-PR 074.539-O/4", value: "074.539-O/4" },
   /** Descrição curta padrão (fallback de metadata e schema). */
   description:
     "Escritório de contabilidade e contador em Cascavel-PR desde 1985. Planejamento tributário, abertura de empresa e gestão contábil estratégica para a sua empresa.",

@@ -41,6 +41,13 @@ export function organizationSchema(): WithContext<AccountingService> {
     logo: `${siteConfig.url}/images/logo.webp`,
     priceRange: "$$",
     foundingDate: String(siteConfig.foundingYear),
+    // Registro no CRC-PR — credencial profissional verificável (E-E-A-T / YMYL).
+    identifier: {
+      "@type": "PropertyValue",
+      propertyID: "CRC-PR",
+      name: "Conselho Regional de Contabilidade do Paraná",
+      value: siteConfig.crc.value,
+    },
     // Regiões atendidas — sinal de alcance local/regional.
     areaServed: [...siteConfig.seo.areaServed],
     // Tópicos de expertise — autoridade temática (E-E-A-T) lida por Google e IAs.

@@ -83,6 +83,7 @@ export function Footer() {
             CEP {address.zip}
           </address>
           <p className="mt-4 text-ink-400">{hours.label}</p>
+          <p className="mt-3 text-xs text-ink-500">Registro profissional: {siteConfig.crc.label}</p>
         </div>
       </Container>
 
