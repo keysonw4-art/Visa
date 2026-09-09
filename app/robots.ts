@@ -20,10 +20,16 @@ export default function robots(): MetadataRoute.Robots {
     "meta-externalagent",
   ];
 
+  // AdsBot IGNORA o grupo "*" — precisa ser nomeado para ter regra própria.
+  // Liberado explicitamente para que as landing pages dos anúncios do Google Ads
+  // sejam rastreadas (afeta o Índice de Qualidade / Landing Page Experience).
+  const adsBots = ["AdsBot-Google", "AdsBot-Google-Mobile"];
+
   return {
     rules: [
       { userAgent: "*", allow: "/", disallow: ["/api/"] },
       ...aiCrawlers.map((userAgent) => ({ userAgent, allow: "/" })),
+      ...adsBots.map((userAgent) => ({ userAgent, allow: "/" })),
     ],
     sitemap: `${siteConfig.url}/sitemap.xml`,
     host: siteConfig.url,
