@@ -19,7 +19,7 @@ export function GET(): Response {
     source: "Contato",
     name: "Maria Silva Oliveira",
     email: "maria.silva@empresadela.com.br",
-    phone: "(45) 99521-3619",
+    phone: "(11) 90000-0000",
     message:
       "Olá! Sou dona de uma indústria em Cascavel e quero migrar minha contabilidade. Podem me passar uma proposta? Faturamento em torno de R$ 500 mil/mês. Aguardo retorno.",
   });

@@ -32,6 +32,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -43,3 +44,12 @@ next-env.d.ts
 # velite (conteúdo compilado — regenerado no build)
 /.velite
 /public/blog
+
+# Config local de ferramentas
+.claude/
+.agents/
+.codex/
+CLAUDE.md
+
+# Runbooks operacionais e zona DNS do cliente (nao publicar)
+docs/

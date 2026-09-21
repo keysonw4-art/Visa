@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Visa Contabilidade
 
-## Getting Started
+Site institucional desenvolvido para um escritório de contabilidade de Cascavel. O projeto combina aquisição de leads, conteúdo especializado, SEO local e proteção dos formulários públicos.
 
-First, run the development server:
+## Funcionalidades
+
+1. Páginas institucionais e páginas de serviços
+2. Conteúdo segmentado por perfil de empresa
+3. Blog em MDX com categorias e paginação
+4. Glossário contábil
+5. Formulário de contato com validação
+6. Proteção contra abuso com Turnstile e limitação de requisições
+7. Envio de email com Resend
+8. Metadados, dados estruturados, sitemap e conteúdo para mecanismos de busca
+9. Gestão de consentimento para ferramentas de análise
+
+## Arquitetura
+
+O projeto usa o App Router do Next.js. O conteúdo editorial é validado durante a geração do site e as configurações institucionais ficam centralizadas em `lib/site.config.ts`.
+
+A rota de contato valida origem, tamanho da requisição e campos recebidos antes do envio. Os controles de segurança e as variáveis privadas permanecem somente no servidor.
+
+## Tecnologias
+
+Next.js 16, React 19, TypeScript, Velite, MDX, Zod, React Hook Form, Resend, Turnstile, Tailwind CSS e GSAP.
+
+## Executar localmente
+
+1. Instale o Node.js
+2. Execute `pnpm install`
+3. Copie `.env.example` para `.env.local`
+4. Execute `pnpm dev`
+5. Acesse `http://localhost:3000`
+
+O modo padrão do email é simulado. Dessa forma, o projeto pode ser avaliado localmente sem enviar mensagens reais.
+
+## Qualidade
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm lint
+pnpm build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Status
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Projeto em produção para um cliente real. Dados institucionais exibidos no site são públicos. Credenciais e configurações privadas não fazem parte do repositório.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Uso do código
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Código disponibilizado para avaliação técnica. A marca e o conteúdo institucional pertencem à Visa Contabilidade.

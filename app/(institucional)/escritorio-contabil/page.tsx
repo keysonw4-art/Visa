@@ -10,7 +10,7 @@ import { pageMetadata } from "@/lib/seo/metadata";
 export const metadata: Metadata = pageMetadata({
   title: "Contato — Escritório de Contabilidade em Cascavel-PR",
   description:
-    "Fale com a Visa Contabilidade em Cascavel-PR. Telefone (45) 3037-1551, WhatsApp, e-mail e endereço no Centro. Preencha o formulário e transforme sua gestão contábil hoje mesmo.",
+    "Fale com a Visa Contabilidade em Cascavel-PR. Telefone (11) 90000-0000, WhatsApp, e-mail e endereço no Centro. Preencha o formulário e transforme sua gestão contábil hoje mesmo.",
   path: "/escritorio-contabil/",
 });
 

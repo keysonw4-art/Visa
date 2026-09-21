@@ -1,6 +1,5 @@
 // Gera a imagem de compartilhamento (Open Graph) 1200x630 usando a logo oficial.
 // Uso: node scripts/gen-og.mjs
-import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
